@@ -19,7 +19,7 @@ app.get('/:time', function(req, res) {
             });
   }
 
-  res.json({unix: Math.floor(date.getTime() / 1000),
+  res.json({unix: date.getTime() / 1000,
             natural: date.toDateString()
           });
 });
