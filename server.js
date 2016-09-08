@@ -4,12 +4,13 @@ app = express();
 
 app.get('/:time', function(req, res) {
   var time = req.params.time;
-  if (isNaN(Date.parse(time))) {
+  var date = new Date(+time);
+  if (isNaN(date)) {
     res.json({unix: null,
               natural: null
             });
   }
-  var date = new Date(time);
+
   res.json({unix: date.getTime(),
             natural: date.toDateString()
           });
