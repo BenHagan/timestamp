@@ -7,15 +7,19 @@ app.get('/', function(req, res) {
 })
 
 app.get('/:time', function(req, res) {
-  var time = req.params.time;
-  var date = new Date(+time);
+  if (isNaN(+req.params.time)) {
+    var time = req.params.time;
+  } else {
+    var time = +req.params.time * 1000;
+  }
+  var date = new Date(time);
   if (isNaN(date)) {
     res.json({unix: null,
               natural: null
             });
   }
 
-  res.json({unix: date.getTime(),
+  res.json({unix: Math.floor(date.getTime() / 1000),
             natural: date.toDateString()
           });
 });
